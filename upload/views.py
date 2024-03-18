@@ -11,8 +11,15 @@ class index(APIView):
     def post(self, request):
         sRepoURL = request.data.get("repoURL")
         sFolderName = fnRandomNameGenerator()
-        repo = Repo.clone_from(sRepoURL, os.path.join(os.getcwd(), "uploadFiles", sFolderName))
-        return Response(data="Cloned", status=status.HTTP_200_OK)
+        repo = Repo.clone_from(sRepoURL, os.path.join(os.getcwd(), "outputFiles", sFolderName))
+        # if locally only
+        
+        # if uploading in cloud = s3
+        # call the function for uploading the data in the cloud
+        clResponseData = {
+            'uniqueID':sFolderName,
+        }
+        return Response(data=clResponseData, status=status.HTTP_200_OK)
         
     def options(self,requst):
         headers = {
@@ -37,6 +44,6 @@ class index(APIView):
                 }
             }
         }
-        return Response(data=clResponseData,headers=headers, status=status.HTTP_200_OK)
+        return Response(data=clResponseData, headers=headers, status=status.HTTP_200_OK)
     
     
