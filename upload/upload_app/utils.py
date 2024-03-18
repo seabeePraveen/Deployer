@@ -1,7 +1,7 @@
 import random
 
 sCharacters = "abcdefghijklmnopqrstuvwxyz0123456789"
-iRandomGeneratorLength = 10
+iRandomGeneratorLength = 20
 
 def fnRandomNameGenerator():
     sOutput = ""

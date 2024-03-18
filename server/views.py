@@ -10,7 +10,7 @@ def fileView(request):
         fileName = request.path[1:]
     sHostName = request.get_host()
     uniqueID = sHostName.split('.')[0]
-    sFolderPath = os.path.join(os.getcwd(), "outputFiles", uniqueID)
+    sFolderPath = os.path.join(os.getcwd(), "BuildedFiles", uniqueID)
     sFilePath = os.path.join(sFolderPath, fileName)
     file_extension = os.path.splitext(fileName)[1]
     if file_extension == '.css':
