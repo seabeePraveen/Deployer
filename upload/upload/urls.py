@@ -1,5 +1,5 @@
 """
-URL configuration for vercel project.
+URL configuration for upload project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -19,5 +19,5 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('server.urls')),
+    path('upload/', include('uploadapp.urls')),
 ]
