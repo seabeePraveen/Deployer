@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from django.http import JsonResponse
-from .models import Upload
+from .models import Project
 
 class UserSerializer(serializers.ModelSerializer):
     
@@ -15,9 +15,9 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
     
-class UploadSerializer(serializers.ModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     
     class Meta:
-        model = Upload
+        model = Project
         fields = ['uniqueID','user','tagName']
