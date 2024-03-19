@@ -4,27 +4,40 @@ import { toast } from "react-hot-toast";
 
 function Login() {
   const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage?.getItem("token")?.length) {
+      navigate("/dashboard", { replace: true });
+    }
+  },[]);
   const [loginInfo, setLoginInfo] = useState({
-    email: "",
+    username: "",
     password: "",
   });
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      loginInfo.email === "u21cs047@coed.svnit.ac.in" &&
-      loginInfo.password === "u21cs047"
-    ) {
-      localStorage.setItem("token", "you are permitted");
-      navigate("/admin");
-    } else {
-      toast.error("Please provide correct credentials.");
+    try {
+      const response = await fetch('http://127.0.0.1:8002/auth/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(loginInfo)
+      });
+      if (response.status === 200) {
+        const responseData = await response.json();
+        console.log(responseData);
+        localStorage.setItem("token", responseData.token);
+        localStorage.setItem("username",responseData.username)
+        navigate("/dashboard");
+      } else {
+        toast.error("Please provide correct credentials.");
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error("An error occurred. Please try again later.");
     }
   };
-  useLayoutEffect(() => {
-    if (localStorage?.getItem("token")?.length) {
-      navigate("/admin", { replace: true });
-    }
-  });
+  
   return (
     <div className="bg-boxdark-2 flex h-screen w-screen flex-col items-center justify-center gap-6">
       <img
@@ -33,26 +46,25 @@ function Login() {
         className="flex w-[20rem] items-center object-cover"
       />
       <div className="flex w-3/4 flex-col gap-9 md:w-1/2">
-        {/* <!-- Sign In Form --> */}
 
         <div className="border-stroke shadow-default dark:border-strokedark dark:bg-boxdark rounded-sm border bg-white">
           <div className="border-stroke px-6.5 dark:border-strokedark border-b py-4">
             <h3 className="font-medium text-white dark:text-white">
-              Welcome Admin,
+              Welcome User,
             </h3>
           </div>
           <form onSubmit={handleSubmit}>
             <div className="p-6.5">
               <div className="mb-4.5">
                 <label className="mb-2.5 block text-black dark:text-white">
-                  Email
+                  Username
                 </label>
                 <input
-                  type="email"
-                  placeholder="Enter your email address"
+                  type="text"
+                  placeholder="Enter your Username address"
                   className="border-stroke focus:border-primary active:border-primary disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary w-full rounded border-[1.5px] bg-transparent px-5 py-3 font-medium  outline-none transition disabled:cursor-default"
                   onChange={(e) =>
-                    setLoginInfo({ ...loginInfo, email: e.target.value })
+                    setLoginInfo({ ...loginInfo, username: e.target.value })
                   }
                 />
               </div>
@@ -136,11 +148,11 @@ function Login() {
 
             <div className="mb-4.5">
               <label className="mb-2.5 block text-black dark:text-white">
-                Email
+                username
               </label>
               <input
-                type="email"
-                placeholder="Enter your email address"
+                type="username"
+                placeholder="Enter your username address"
                 className="border-stroke focus:border-primary active:border-primary disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary w-full rounded border-[1.5px] bg-transparent px-5 py-3 font-medium outline-none transition disabled:cursor-default"
               />
             </div>

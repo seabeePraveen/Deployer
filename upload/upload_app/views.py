@@ -69,8 +69,8 @@ class LoginUser(APIView):
         
         return Response(data={
             'token': str(token_obj),
-            'email': str(user)  # Assuming you want to return the user's email
-        }, status=status.HTTP_201_CREATED)
+            'username': str(user)
+        }, status=status.HTTP_200_OK)
         
 class RegisterUser(APIView):
     def post(self,request):
