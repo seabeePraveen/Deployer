@@ -12,11 +12,14 @@ def fileView(request):
     uniqueID = sHostName.split('.')[0]
     sFolderPath = os.path.join(os.getcwd(), "BuildedFiles", uniqueID)
     sFilePath = os.path.join(sFolderPath, fileName)
-    file_extension = os.path.splitext(fileName)[1]
-    if file_extension == '.css':
-        return FileResponse(open(sFilePath, 'rb'), content_type='text/css')
-    elif file_extension == '.js':
-        return FileResponse(open(sFilePath, 'rb'), content_type='application/javascript')
+    if os.path.exists(sFilePath):
+        file_extension = os.path.splitext(fileName)[1]
+        if file_extension == '.css':
+            return FileResponse(open(sFilePath, 'rb'), content_type='text/css')
+        elif file_extension == '.js':
+            return FileResponse(open(sFilePath, 'rb'), content_type='application/javascript')
+        else:
+            return FileResponse(open(sFilePath, 'rb'))
     else:
-        return FileResponse(open(sFilePath, 'rb'))
+        return FileResponse(open(os.path.join(sFolderPath, 'index.html'), 'rb'))
 
