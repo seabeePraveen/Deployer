@@ -28,7 +28,7 @@ class deploy(APIView):
             return Response(data="Build Failed",status=status.HTTP_400_BAD_REQUEST)
         else:
             # move the files into the Builded Files folder
-            sBuildFilesPath = os.path.join(sRepoFolder, 'build')
+            sBuildFilesPath = os.path.join(sRepoFolder, 'dist')
             sBuildedFolderPath = os.path.join(sParentDir, 'BuildedFiles', folderName)
             
             shutil.move(sBuildFilesPath, sBuildedFolderPath)

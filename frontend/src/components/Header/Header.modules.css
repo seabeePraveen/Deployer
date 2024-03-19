@@ -1,0 +1,39 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 2rem;
+    color: white;
+}
+.header_title{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.navbar__list {
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.navbar__item {
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.navbar__item:last-child {
+    margin-right: 0;
+}
+.login-button{
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 3px 10px;
+    border: 1.5px solid white;
+    border-radius: 7px;
+    background-color: white;
+    color: black;
+    font-weight: 600;
+}

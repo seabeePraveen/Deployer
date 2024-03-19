@@ -13,7 +13,14 @@ class index(APIView):
     def post(self, request):
         sRepoURL = request.data.get("repoURL")
         sFolderName = fnRandomNameGenerator()
-        repo = Repo.clone_from(sRepoURL, os.path.join(os.getcwd(), "GithubFiles", sFolderName))
+        print("Cloning Started")
+        try:
+            repo = Repo.clone_from(sRepoURL, os.path.join(os.getcwd(), "GithubFiles", sFolderName))
+        except Exception as e:
+            print(str(e))
+            return Response(data=str(e),status=status.HTTP_400_BAD_REQUEST)
+        else:
+            print("Cloned Succesfully")
         # if locally only
         
         # if uploading in cloud = s3
