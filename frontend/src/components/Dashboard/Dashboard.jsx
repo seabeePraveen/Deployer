@@ -1,6 +1,10 @@
 function Dashboard(){
     return (
-        <div></div>
+        <div>
+            <h1 className="text-3xl">
+      Hello world!
+    </h1>
+        </div>
     );
 }
 
