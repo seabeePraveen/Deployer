@@ -5,7 +5,9 @@ from .utils import fnRandomNameGenerator
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+from .serializer import UserSerializer
 
 class index(APIView):
     def post(self, request):
@@ -46,4 +48,36 @@ class index(APIView):
         }
         return Response(data=clResponseData, headers=headers, status=status.HTTP_200_OK)
     
-    
+class LoginUser(APIView):
+    def post(self, request):
+        try:
+            username = request.data['username']
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return Response(data={
+                "message":"user not found"
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        token_obj, _ = Token.objects.get_or_create(user=user)
+        
+        return Response(data={
+            'token': str(token_obj),
+            'email': str(user)  # Assuming you want to return the user's email
+        }, status=status.HTTP_201_CREATED)
+        
+class RegisterUser(APIView):
+    def post(self,request):
+        serializer = UserSerializer(data=request.data)
+
+        if not serializer.is_valid():
+            return Response(data={
+                'message':str(serializer.errors)
+            },status=status.HTTP_400_BAD_REQUEST)
+            
+        serializer.save()
+        user = User.objects.get(username=serializer.data['username'])
+        token_obj,_ = Token.objects.get_or_create(user=user)
+        
+        return Response(data={
+            'token':str(token_obj)
+        },status=status.HTTP_201_CREATED)
