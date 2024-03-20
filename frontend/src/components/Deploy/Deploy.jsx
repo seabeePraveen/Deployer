@@ -1,5 +1,11 @@
-function Deploy(){
-    return(
+import { useLocation } from 'react-router-dom';
+
+function Deploy() {
+    const location = useLocation();
+    const data = location.state;
+    
+    
+    return (
         <div></div>
     );
 }
