@@ -25,7 +25,6 @@ function Login() {
       });
       if (response.status === 200) {
         const responseData = await response.json();
-        console.log(responseData);
         localStorage.setItem("token", responseData.token);
         localStorage.setItem("username",responseData.username)
         navigate("/dashboard");
@@ -40,23 +39,17 @@ function Login() {
   
   return (
     <div className="bg-boxdark-2 flex h-screen w-screen flex-col items-center justify-center gap-6">
-      <img
-        src="/assets/NEXUStext.png"
-        alt="NEXUS"
-        className="flex w-[20rem] items-center object-cover"
-      />
-      <div className="flex w-3/4 flex-col gap-9 md:w-1/2">
-
+      <div className="flex w-3/4 flex-col gap-9 md:w-1/3">
         <div className="border-stroke shadow-default dark:border-strokedark dark:bg-boxdark rounded-sm border bg-white">
-          <div className="border-stroke px-6.5 dark:border-strokedark border-b py-4">
-            <h3 className="font-medium text-white dark:text-white">
+          <div className=" py-4">
+            <h3 className="font-medium text-black dark:text-black text-center">
               Welcome User,
             </h3>
           </div>
           <form onSubmit={handleSubmit}>
-            <div className="p-6.5">
-              <div className="mb-4.5">
-                <label className="mb-2.5 block text-black dark:text-white">
+            <div className="px-16">
+              <div className="mb-6">
+                <label className="mb-2.5 block text-black dark:text-black">
                   Username
                 </label>
                 <input
@@ -70,7 +63,7 @@ function Login() {
               </div>
 
               <div>
-                <label className="mb-2.5 block text-black dark:text-white">
+                <label className="mb-2.5 block text-black dark:text-black">
                   Password
                 </label>
                 <input
@@ -119,72 +112,12 @@ function Login() {
                 </Link>
               </div>
 
-              <button className="bg-primary text-gray flex w-full justify-center rounded p-3 font-medium">
+              <button className="text-gray flex w-full justify-center rounded p-3 font-medium mb-6 bg-blue-400 text-white mt-2">
                 Sign In
               </button>
             </div>
           </form>
         </div>
-
-        {/* <!-- Sign Up Form --> */}
-        {/* <div className="border-stroke shadow-default dark:border-strokedark dark:bg-boxdark rounded-sm border bg-white">
-        <div className="border-stroke px-6.5 dark:border-strokedark border-b py-4">
-          <h3 className="font-medium text-black dark:text-white">
-            Sign Up Form
-          </h3>
-        </div>
-        <form action="#">
-          <div className="p-6.5">
-            <div className="mb-4.5">
-              <label className="mb-2.5 block text-black dark:text-white">
-                Name
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your full name"
-                className="border-stroke focus:border-primary active:border-primary disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary w-full rounded border-[1.5px] bg-transparent px-5 py-3 font-medium outline-none transition disabled:cursor-default"
-              />
-            </div>
-
-            <div className="mb-4.5">
-              <label className="mb-2.5 block text-black dark:text-white">
-                username
-              </label>
-              <input
-                type="username"
-                placeholder="Enter your username address"
-                className="border-stroke focus:border-primary active:border-primary disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary w-full rounded border-[1.5px] bg-transparent px-5 py-3 font-medium outline-none transition disabled:cursor-default"
-              />
-            </div>
-
-            <div className="mb-4.5">
-              <label className="mb-2.5 block text-black dark:text-white">
-                Password
-              </label>
-              <input
-                type="password"
-                placeholder="Enter password"
-                className="border-stroke focus:border-primary active:border-primary disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary w-full rounded border-[1.5px] bg-transparent px-5 py-3 font-medium outline-none transition disabled:cursor-default"
-              />
-            </div>
-
-            <div className="mb-5.5">
-              <label className="mb-2.5 block text-black dark:text-white">
-                Re-type Password
-              </label>
-              <input
-                type="password"
-                placeholder="Re-enter password"
-                className="border-stroke focus:border-primary active:border-primary disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary w-full rounded border-[1.5px] bg-transparent px-5 py-3 font-medium outline-none transition disabled:cursor-default"
-              />
-            </div>
-
-            <button className="bg-primary text-gray flex w-full justify-center rounded p-3 font-medium">
-              Sign Up
-            </button>
-          </div>
-        </form>
-      </div> */}
       </div>
     </div>
   );
